@@ -1,20 +1,19 @@
 import express from 'express';
-import { City } from './models/city';
+import cors from 'cors';
+import { RawCity } from './models/raw-city';
+import { getCities } from './load-cities';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 const app = express();
+app.use(cors());
 
-const mapOfCities = new Map<number, Map<number, City>>();
+const mapOfCities = new Map<number, Map<number, RawCity>>();
 
 app.get('/cities', (req, res) => {
   res.send({
-    cities: [
-      { name: 'Egypt', coords: [26.8206, 30.8025] },
-      { name: 'United Kingdom', coords: [55.3781, 3.436] },
-      { name: 'United States', coords: [37.0902, -95.7129] },
-    ],
+    cities: getCities().slice(0, Number(req.query.cityCount)),
   });
 });
 

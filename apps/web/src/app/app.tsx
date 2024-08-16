@@ -17,7 +17,10 @@ export function App() {
     fetch(
       'http://localhost:3000/cities?' +
         new URLSearchParams({
-          ...(baseCity && { baseCity: baseCity.name }),
+          ...(baseCity && {
+            lat: baseCity.coords[0].toString(),
+            lng: baseCity.coords[1].toString(),
+          }),
           cityCount: cityCount.toString(),
         }).toString()
     )
@@ -35,9 +38,13 @@ export function App() {
         zoomButtons: false,
         markers,
         zoomOnScroll: true,
-        onMarkerClick: (event: any, cityIndex: number) => {
-          console.log(cityIndex);
+        zoomMax: 100,
+        onMarkerClick: (_: any, cityIndex: number) => {
           setBaseCity(markers[cityIndex]);
+        },
+        onMarkerTooltipShow: (_: any, tooltip: any) => {
+          const city = markers.find((city) => city.name === tooltip.text());
+          tooltip.text(tooltip.text() + ' (' + city?.coords.join(', ') + ')');
         },
       })
     );

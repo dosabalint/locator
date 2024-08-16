@@ -1,5 +1,5 @@
 export type RawCity = {
-  city: number;
-  lat: string;
-  lng: string;
+  city: string;
+  lat: number;
+  lng: number;
 };

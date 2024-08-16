@@ -59,9 +59,8 @@ export function App() {
     mapRef.current?.replaceChildren();
   };
 
-  const resetSelection = () => {
-    setBaseCity(undefined);
-    fetchCities();
+  const reload = () => {
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -76,41 +75,51 @@ export function App() {
 
   return (
     <div>
-      <div ref={mapRef} style={{ height: '80vh' }} />
+      <div ref={mapRef} style={{ height: '100vh' }} />
 
-      <div className="flex flex-row gap-2.5 justify-center items-center">
-        {!baseCity && <span>Select a city first! (zoom and click)</span>}
-        {baseCity && <span>Base city: {baseCity.name}</span>}
-      </div>
-
-      {baseCity && (
-        <>
+      <div className="absolute top-0 left-0 right-0 flex justify-center">
+        <div className="mx-auto bg-gray-400 rounded px-10 py-5">
           <div className="flex flex-row gap-2.5 justify-center items-center">
-            Closest
-            <input
-              type="number"
-              value={cityCount}
-              onChange={(e) => setCityCount(Number(e.target.value))}
-              className={'w-[3rem] border'}
-            />
-            city
-            <button
-              className="border-2 rounded p-1"
-              onClick={() => fetchCities()}
-            >
-              Fetch
-            </button>
+            {!baseCity && <span>Select a city first! (zoom and click)</span>}
+            {baseCity && (
+              <div>
+                <span className="mr-2">Base city: {baseCity.name}</span>
+                <button
+                  className="border-2 rounded px-1 py-0.5 bg-blue-500"
+                  onClick={() => reload()}
+                >
+                  Reload
+                </button>
+              </div>
+            )}
           </div>
-          <div className="flex flex-row justify-center items-center">
-            <button
-              className="border-2 rounded p-1"
-              onClick={() => resetSelection()}
-            >
-              Reset selection
-            </button>
-          </div>
-        </>
-      )}
+
+          {baseCity && (
+            <>
+              {markers.length - 1 > cityCount && (
+                <div className="flex flex-row gap-2.5 justify-center items-center">
+                  Closest
+                  <input
+                    type="number"
+                    value={cityCount}
+                    onChange={(e) => setCityCount(Number(e.target.value))}
+                    className={'w-[3rem] border'}
+                  />
+                  city
+                  <button
+                    className="border-2 rounded px-1 py-0.5 bg-blue-500"
+                    onClick={() => fetchCities()}
+                  >
+                    Fetch
+                  </button>
+                </div>
+              )}
+
+              <div className="flex flex-row justify-center items-center"></div>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

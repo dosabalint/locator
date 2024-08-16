@@ -29,6 +29,7 @@ export const loadCities = async (): Promise<void> => {
       lat: +dataArray[6].replace(/"/g, ''),
       lng: +dataArray[7].replace(/"/g, ''),
     };
+
     cityRepository.insert(city);
   }
 

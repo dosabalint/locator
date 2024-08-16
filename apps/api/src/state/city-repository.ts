@@ -6,6 +6,11 @@ class CityRepository {
   private mapOfCities = new Map<number, Map<number, RawCity[]>>();
 
   insert(city: RawCity): void {
+    if (!city.city || !city.lat || !city.lng) {
+      console.log('Invalid city: ', city);
+      return;
+    }
+
     console.log('Inserting city: ', city);
 
     const latKey =

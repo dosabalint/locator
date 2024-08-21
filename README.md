@@ -11,4 +11,4 @@ npx nx serve web
 ```
 ## Copyright 
 
-Citi data was downloaded from here: https://simplemaps.com/data/us-cities
+City data was downloaded from here: https://simplemaps.com/data/us-cities

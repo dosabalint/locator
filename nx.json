@@ -27,17 +27,10 @@
     }
   },
   "plugins": [
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
     {
       "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      },
+      "options": { "targetName": "test" },
       "exclude": ["apps/api-e2e/**/*"]
     },
     {
@@ -57,13 +50,9 @@
         "linter": "eslint",
         "bundler": "webpack"
       },
-      "component": {
-        "style": "tailwind"
-      },
-      "library": {
-        "style": "tailwind",
-        "linter": "eslint"
-      }
+      "component": { "style": "tailwind" },
+      "library": { "style": "tailwind", "linter": "eslint" }
     }
-  }
+  },
+  "nxCloudAccessToken": "YmUxZjQ2NzAtOTA0MS00NjU0LTg1NjEtOTZkMTFiZGY5MGU0fHJlYWQtd3JpdGU="
 }
